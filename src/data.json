@@ -1,0 +1,270 @@
+[{
+    "id": 1,
+    "color": "#2CDAB0",
+    "name": "bulbasaur",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "grass"
+            }
+        },
+        {
+            "slot": 2,
+            "type": {
+                "name": "poison"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+            }
+        }
+    }
+},
+{
+    "id": 2,
+    "color": "#2CDAB0",
+    "name": "ivysaur",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "grass"
+            }
+        },
+        {
+            "slot": 2,
+            "type": {
+                "name": "poison"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png"
+            }
+        }
+    }
+},
+{
+    "id": 3,
+    "color": "#2CDAB0",
+    "name": "venusaur",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "grass"
+            }
+        },
+        {
+            "slot": 2,
+            "type": {
+                "name": "poison"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png"
+            }
+        }
+    }
+},
+{
+    "id": 4,
+    "color": "#F7786B",
+    "name": "charmander",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "fire"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png"
+            }
+        }
+    }
+},
+{
+    "id": 5,
+    "color": "#F7786B",
+    "name": "charmeleon",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "fire"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png"
+            }
+        }
+    }
+},
+{
+    "id": 6,
+    "color": "#F7786B",
+    "name": "Charizard",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "fire"
+            }
+        },
+        {
+            "slot": 2,
+            "type": {
+                "name": "flying"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
+            }
+        }
+    }
+},
+{
+    "id": 7,
+    "color": "#58ABF6",
+    "name": "squirtle",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "water"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png"
+            }
+        }
+    }
+},
+{
+    "id": 8,
+    "color": "#58ABF6",
+    "name": "Wartortle",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "water"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png"
+            }
+        }
+    }
+},
+{
+    "id": 9,
+    "color": "#58ABF6",
+    "name": "Blastoise",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "water"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png"
+            }
+        }
+    }
+},
+{
+    "id": 25,
+    "color": "#FFD76E",
+    "name": "Pikachu",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "Electric"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+            }
+        }
+    }
+},
+{
+    "id": 133,
+    "color": "#A7A877",
+    "name": "Eevee",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "Normal"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png"
+            }
+        }
+    }
+},
+{
+    "id": 94,
+    "color": "#705998",
+    "name": "Gengar",
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "Ghost"
+            }
+        },
+        {
+            "slot": 2,
+            "type": {
+                "name": "Poison"
+            }
+        }
+    ],
+    "sprites": {
+        "other": {
+            "official_artwork": {
+                "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png"
+            }
+        }
+    }
+}]
