@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { capitalize } from '../../../shared/helpers';
 
 import './CardHeader.css';

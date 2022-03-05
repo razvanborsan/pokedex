@@ -1,0 +1,19 @@
+
+.searchBar {
+    width: 315px;
+    border-radius: 10px;
+    border: 1px solid #f5f5f5;
+    padding: 17px;
+    padding-left: 50px;
+
+    background-image: url('https://img.icons8.com/ios/344/search--v1.png');
+    background-size: 28px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+
+    font-size: 16px;
+    color: #4E4D50;
+
+    outline: 0;
+}
+  

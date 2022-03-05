@@ -210,7 +210,7 @@
         {
             "slot": 1,
             "type": {
-                "name": "Electric"
+                "name": "electric"
             }
         }
     ],
@@ -230,7 +230,7 @@
         {
             "slot": 1,
             "type": {
-                "name": "Normal"
+                "name": "normal"
             }
         }
     ],
@@ -250,13 +250,13 @@
         {
             "slot": 1,
             "type": {
-                "name": "Ghost"
+                "name": "ghost"
             }
         },
         {
             "slot": 2,
             "type": {
-                "name": "Poison"
+                "name": "poison"
             }
         }
     ],
