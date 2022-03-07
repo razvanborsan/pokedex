@@ -1,3 +1,4 @@
+@import '../../../shared/colors.css';
 
 .cardBody {
     display: flex;
@@ -18,10 +19,10 @@
     margin-bottom: 10px;
     border-radius: 5px;
 
-    background-color: #8C898F;
+    background-color: var(--grass-green);
 
-    color: #fff;
+    color: var(--white);
     text-align: center;
     
-    filter: brightness(0.90);
+    filter: brightness(0.9);
 }

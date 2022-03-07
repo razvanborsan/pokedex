@@ -10,8 +10,7 @@ function CardBody({ pokemon }) {
       <div className="pokemonTypesContainer">
         {pokemon.types.map((entry) => (
           <div
-            className="pokemonType"
-            style={{ backgroundColor: pokemon.color }}
+            className={`pokemonType ${entry.type.name}`}
             key={entry.slot}
           >
             {capitalize(entry.type.name)}
