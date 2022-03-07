@@ -1,6 +1,5 @@
 [{
     "id": 1,
-    "color": "#2CDAB0",
     "name": "bulbasaur",
     "types": [
         {
@@ -26,7 +25,6 @@
 },
 {
     "id": 2,
-    "color": "#2CDAB0",
     "name": "ivysaur",
     "types": [
         {
@@ -52,7 +50,6 @@
 },
 {
     "id": 3,
-    "color": "#2CDAB0",
     "name": "venusaur",
     "types": [
         {
@@ -78,7 +75,6 @@
 },
 {
     "id": 4,
-    "color": "#F7786B",
     "name": "charmander",
     "types": [
         {
@@ -98,7 +94,6 @@
 },
 {
     "id": 5,
-    "color": "#F7786B",
     "name": "charmeleon",
     "types": [
         {
@@ -118,7 +113,6 @@
 },
 {
     "id": 6,
-    "color": "#F7786B",
     "name": "Charizard",
     "types": [
         {
@@ -144,7 +138,6 @@
 },
 {
     "id": 7,
-    "color": "#58ABF6",
     "name": "squirtle",
     "types": [
         {
@@ -164,7 +157,6 @@
 },
 {
     "id": 8,
-    "color": "#58ABF6",
     "name": "Wartortle",
     "types": [
         {
@@ -184,7 +176,6 @@
 },
 {
     "id": 9,
-    "color": "#58ABF6",
     "name": "Blastoise",
     "types": [
         {
@@ -204,7 +195,6 @@
 },
 {
     "id": 25,
-    "color": "#FFD76E",
     "name": "Pikachu",
     "types": [
         {
@@ -224,7 +214,6 @@
 },
 {
     "id": 133,
-    "color": "#A7A877",
     "name": "Eevee",
     "types": [
         {
@@ -244,7 +233,6 @@
 },
 {
     "id": 94,
-    "color": "#705998",
     "name": "Gengar",
     "types": [
         {
