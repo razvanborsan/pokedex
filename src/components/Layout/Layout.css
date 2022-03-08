@@ -1,0 +1,14 @@
+.app-container {    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 100vw;
+    min-height: 100vh;
+
+    background-color: #FFF7E8;
+}
+  
+.main-content {
+    width: 1080px;
+}

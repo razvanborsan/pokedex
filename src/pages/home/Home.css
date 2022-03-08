@@ -1,0 +1,18 @@
+.header-container {
+    margin-left: 30px;
+}
+
+.pokemon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 20px;
+}
+
+.pokedex-title {
+    padding: 20px 0;
+    
+    color: var(--marine);
+}
