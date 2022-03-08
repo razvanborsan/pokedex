@@ -13,11 +13,15 @@ function Home() {
   const [filter, setFilter] = useState('');
 
   function getPokemonCards(data) {
-    return data
-      .filter((pokemon) => isStringIncluded(pokemon.name, filter)
+    return data.reduce((accumulator, pokemon) => {
+      if (isStringIncluded(pokemon.name, filter)
       || pokemon.types.some((entry) => isStringIncluded(entry.type.name, filter))
-      || pokemon.id === +filter)
-      .map((pokemon) => <Card key={pokemon.id} pokemon={pokemon} />);
+      || pokemon.id === +filter) {
+        accumulator.push(<Card key={pokemon.id} pokemon={pokemon} />);
+      }
+
+      return accumulator;
+    }, []);
   }
 
   return (

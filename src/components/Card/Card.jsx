@@ -15,8 +15,7 @@ function Card({ pokemon }) {
             <h3>{capitalize(pokemon.name)}</h3>
             <h4>
               #
-              {Array(3 - `${pokemon.id}`.length).fill(0)}
-              {pokemon.id}
+              {pokemon.id.toString().padStart(3, '0')}
             </h4>
           </div>
 
