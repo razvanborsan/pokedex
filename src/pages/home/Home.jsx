@@ -30,7 +30,7 @@ function Home() {
         <h1 className="pokedex-title">Pokedex</h1>
         <Search placeholder="Search pokemon name, number or type..." value={filter} setValue={setFilter} />
       </div>
-      <div className="pokemon-container">
+      <div className="cards-container">
         {getPokemonCards(pokemons)}
       </div>
     </>

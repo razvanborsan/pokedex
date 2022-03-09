@@ -1,0 +1,31 @@
+.content-404 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 100vh;
+
+    text-align: center;
+}
+
+.content-404 > img {
+    max-width: 500px;
+    padding: 40px;
+}
+
+.content-404 > p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+}
+
+#pokeflute {
+    max-width: 20px;
+}
+
+.link-404 {
+    text-decoration: none;
+}
