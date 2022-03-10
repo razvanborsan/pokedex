@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Card from 'components/Card/Card';
+import PreviewCard from 'components/cards/PreviewCard/PreviewCard';
 import Search from 'components/Search/Search';
 
 import { isStringIncluded } from 'shared/helpers';
@@ -17,7 +17,7 @@ function Home() {
       if (isStringIncluded(pokemon.name, filter)
       || pokemon.types.some((entry) => isStringIncluded(entry.type.name, filter))
       || pokemon.id === +filter) {
-        accumulator.push(<Card key={pokemon.id} pokemon={pokemon} />);
+        accumulator.push(<PreviewCard key={pokemon.id} pokemon={pokemon} />);
       }
 
       return accumulator;

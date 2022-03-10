@@ -1,12 +1,12 @@
 :root {
     --white: #fff;
-    --grass-green: #78C84F;
-    --fire-red: #F08030;
-    --water-blue: #6890F0;
-    --electric-yellow: #F9D030;
-    --normal-gray: #A7A877;
-    --ghost-purple: #705998;
-    --flying-purple: #A890F0;
-    --poison-purple: #9F419F;
+    --grass-green: rgba(120, 200, 79, 0.4);
+    --fire-red: rgba(240, 128, 48, 0.4);
+    --water-blue: rgba(104, 144, 240, 0.4);
+    --electric-yellow: rgba(249, 208, 48, 0.4);
+    --normal-gray: rgba(167, 168, 119, 0.4);
+    --ghost-purple: rgba(112, 89, 152, 0.4);
+    /* --flying-purple: #A890F0;
+    --poison-purple: #9F419F; */
     --marine: #042440;
 }

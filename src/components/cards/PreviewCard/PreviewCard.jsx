@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import { capitalize } from 'shared/helpers';
 
 import 'shared/pokemonTypes.css';
-import './Card.css';
+import BaseCard from '../BaseCard/BaseCard';
+import TypeCard from '../TypeCard/TypeCard';
+import './PreviewCard.css';
 
-function Card({ pokemon }) {
+function PreviewCard({ pokemon }) {
   return (
-    <div className={`card-container ${pokemon.types[0].type.name}`}>
+    <BaseCard customClasses={`preview-card ${pokemon.types[0].type.name}`}>
       <Link to={`/pokemon/${pokemon.id}`} id={pokemon.id}>
         <div className="card-content">
           <div className="card-header">
@@ -20,14 +22,9 @@ function Card({ pokemon }) {
           </div>
 
           <div className="card-body">
-            <div className="pokemon-types-container">
+            <div className="pokemon-types-wrapper">
               {pokemon.types.map((entry) => (
-                <div
-                  className={`pokemon-type ${entry.type.name}`}
-                  key={entry.slot}
-                >
-                  {capitalize(entry.type.name)}
-                </div>
+                <TypeCard type={entry.type.name} />
               ))}
             </div>
             <div className="pokemon-photo">
@@ -36,9 +33,8 @@ function Card({ pokemon }) {
           </div>
         </div>
       </Link>
-
-    </div>
+    </BaseCard>
   );
 }
 
-export default Card;
+export default PreviewCard;

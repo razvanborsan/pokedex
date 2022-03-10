@@ -2,11 +2,14 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import data from 'data/data.json';
+import bulbasaur from 'data/bulbasaur.json';
 
 import NotFound from 'pages/404/NotFound';
 
 import './Pokemon.css';
-import { capitalize } from '../../shared/helpers';
+import ViewCard from '../../components/cards/ViewCard/ViewCard';
+import StatsCard from '../../components/cards/StatsCard/StatsCard';
+import EvolutionCard from '../../components/cards/EvolutionCard/EvolutionCard';
 
 function Pokemon() {
   const { pokemonId } = useParams();
@@ -16,52 +19,11 @@ function Pokemon() {
 
   const pokemon = data.find((entry) => entry.id === +pokemonId);
 
+  console.log('bulba', bulbasaur.stats);
+
   return (
     <div className="pokemon-content">
-      <div className="pokemon-artwork-card">
-        <div className="pokemon-artwork-card-header">
-          <span className="pokemon-id-info">
-            <div>{capitalize(pokemon.name)}</div>
-            <div>
-              #
-              {pokemon.id.toString().padStart(3, '0')}
-            </div>
-          </span>
-
-          <span className="pokemon-types-container">
-            {pokemon.types.map((entry) => entry.type.name)}
-          </span>
-        </div>
-
-        <img className="pokemon-artwork" src={pokemon.sprites.other.official_artwork.front_default} alt="Pokemon" />
-
-        <div className="pokemon-info-container">
-          <span className="pokemon-info-block">
-            <div className="pokemon-info-header">Height</div>
-            <div className="pokemon-info-content">8.03m</div>
-          </span>
-
-          <span className="pokemon-info-block">
-            <div className="pokemon-info-header">Weight</div>
-            <div className="pokemon-info-content">90kg</div>
-          </span>
-
-          <span className="pokemon-info-block">
-            <div className="pokemon-info-header">Egg Groups</div>
-            <div className="pokemon-info-content">Monster, Dragon</div>
-          </span>
-
-          <span className="pokemon-info-block">
-            <div className="pokemon-info-header">Hatch Steps</div>
-            <div className="pokemon-info-content">7650</div>
-          </span>
-
-          <span className="pokemon-info-block">
-            <div className="pokemon-info-header">Abilities</div>
-            <div className="pokemon-info-content">snow warning, refrigerate</div>
-          </span>
-        </div>
-      </div>
+      <ViewCard pokemon={pokemon} />
 
       <div className="pokemon-trivia-container">
         <div className="pokemon-description-container">
@@ -72,9 +34,11 @@ function Pokemon() {
           </p>
         </div>
 
-        <div className="pokemon-stats-container" />
+        {/* <div className="pokemon-stats-container" /> */}
 
-        <div className="pokemon-evolutions-container" />
+        <StatsCard pokemonType={pokemon.types[0].type.name} />
+
+        <EvolutionCard pokemonType={pokemon.types[0].type.name} />
       </div>
     </div>
   );

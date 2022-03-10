@@ -23,11 +23,3 @@
 .ghost {
     background-color: var(--ghost-purple);
 }
-
-.flying {
-    background-color: var(--flying-purple);
-}
-
-.poison {
-    background-color: var(--poison-purple);
-}
