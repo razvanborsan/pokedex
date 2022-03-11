@@ -27,7 +27,7 @@ function ViewCard({ pokemon }) {
         </span>
 
         <span className="pokemon-types-container">
-          {pokemon.types.map((entry) => <TypeCard type={entry.type.name} />)}
+          {pokemon.types.map((entry) => <TypeCard key={entry.slot} type={entry.type.name} />)}
         </span>
       </div>
 

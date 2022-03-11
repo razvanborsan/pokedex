@@ -1,15 +1,37 @@
 @import '../../shared/pokemonTypes.css';
 
 .pokemon-content {
-    height: 100vh;
+    min-height: 100vh;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.pokemon-content-upper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
+
+    gap: 20px;
+
+    width: 100%;
+}
+
+.sprite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pokemon-content-lower {
+    width: 100%;
+    padding: 0;
 }
 
 .pokemon-trivia-container {
     max-width: 450px;
-    padding: 30px;
 }

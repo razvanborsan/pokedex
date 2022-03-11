@@ -27,7 +27,6 @@ function Home() {
   return (
     <>
       <div className="header-container">
-        <h1 className="pokedex-title">Pokedex</h1>
         <Search placeholder="Search pokemon name, number or type..." value={filter} setValue={setFilter} />
       </div>
       <div className="cards-container">

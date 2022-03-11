@@ -24,7 +24,7 @@ function PreviewCard({ pokemon }) {
           <div className="card-body">
             <div className="pokemon-types-wrapper">
               {pokemon.types.map((entry) => (
-                <TypeCard type={entry.type.name} />
+                <TypeCard key={entry.slot} type={entry.type.name} />
               ))}
             </div>
             <div className="pokemon-photo">
