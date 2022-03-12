@@ -4,18 +4,16 @@ import BaseCard from '../BaseCard/BaseCard';
 import './StatsCard.css';
 
 function Stat({ title, value }) {
-  const updatedVal = (value * 190) / 255;
-
   function getBgColor(val) {
-    if (val > 127.5) return '#abfea3';
-    if (val > 65) return '#fdfaa5';
+    if (val > (255 / 2)) return '#abfea3';
+    if (val > (255 / 4)) return '#fdfaa5';
     return '#fda5a4';
   }
 
   return (
     <div className="stat-wrapper">
       <span className="stat-title">{title}</span>
-      <span className="stat-line" style={{ width: updatedVal, backgroundColor: getBgColor(value) }} />
+      <span className="stat-line" style={{ width: +value, backgroundColor: getBgColor(+value) }} />
       <span className="stat-value">{value}</span>
     </div>
   );

@@ -33,8 +33,6 @@ function Pokemon() {
             </p>
           </div>
 
-          {/* <div className="pokemon-stats-container" /> */}
-
           <StatsCard pokemonType={pokemon.types[0].type.name} />
 
           <EvolutionCard pokemonType={pokemon.types[0].type.name} />
