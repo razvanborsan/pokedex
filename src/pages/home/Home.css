@@ -1,0 +1,12 @@
+.header-container {
+    margin-left: 30px;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 20px;
+}

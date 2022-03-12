@@ -24,10 +24,26 @@
     background-color: var(--ghost-purple);
 }
 
-.flying {
-    background-color: var(--flying-purple);
+.grass-hover:hover {
+    background-color: rgba(120, 200, 79, 0.6);
 }
 
-.poison {
-    background-color: var(--poison-purple);
+.fire-hover:hover {
+    background-color: rgba(240, 128, 48, 0.4);
+}
+
+.water-hover:hover {
+    background-color: rgba(104, 144, 240, 0.4);
+}
+
+.electric-hover:hover {
+    background-color: rgba(249, 208, 48, 0.4);
+}
+
+.normal-hover:hover {
+    background-color: rgba(167, 168, 119, 0.4);
+}
+
+.ghost-hover:hover {
+    background-color: rgba(112, 89, 152, 0.4);
 }

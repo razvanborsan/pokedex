@@ -1,0 +1,51 @@
+.pokemon-evolutions-container {
+    border-radius: 10px;
+
+    width: 100%;
+    height: 150px;
+
+    gap: 40px;
+    margin: 0;
+
+    flex-direction: row;
+    overflow-x: scroll;
+
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.pokemon-evolutions-container::-webkit-scrollbar {
+    display: none;
+}
+
+.evolution-wrapper:first-of-type {
+    padding-left: 20px;
+}
+
+.evolution-wrapper:last-of-type {
+    padding-right: 20px;
+}
+
+.evolution-wrapper > img {
+    height: 80px;
+}
+
+.evolution-wrapper:hover {
+    border-radius: 15px;
+}
+
+.evolution-wrapper {
+    color: black;
+
+    transition: background-color .3s, border-radius .2s;
+}
+
+.evolution-title {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.evolution-id {
+    font-size: 12px;
+    font-weight: 100;
+}

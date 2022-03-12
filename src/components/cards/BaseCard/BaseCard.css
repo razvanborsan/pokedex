@@ -1,0 +1,18 @@
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 20px;
+    border: .1px solid var(--marine);
+    border-radius: 15px;
+    box-shadow: 0 0 15px #BFBFBF;
+
+    transition: filter .25s;
+
+}
+
+.card-container > a {
+    text-decoration: none;
+}

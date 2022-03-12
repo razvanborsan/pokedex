@@ -1,0 +1,45 @@
+.preview-card {
+    width: 300px;
+    height: 225px;
+}
+
+.preview-card:hover {
+    filter: brightness(1.1);
+}
+
+.card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    color: var(--white);
+
+    width: 275px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 85%;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 90%;
+}
+
+.pokemon-photo img {
+    width: 120px;
+    height: 120px;
+}
+
+.pokemon-types-wrapper {
+    color: var(--marine);
+    text-align: center;
+}
