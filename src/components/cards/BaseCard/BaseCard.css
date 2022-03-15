@@ -7,12 +7,12 @@
     margin: 20px;
     border: .1px solid var(--marine);
     border-radius: 15px;
-    box-shadow: 0 0 15px #BFBFBF;
+    box-shadow: 0 0 15px var(--shadow-gray);
 
     transition: filter .25s;
 
 }
 
-.card-container > a {
+a {
     text-decoration: none;
 }

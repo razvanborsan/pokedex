@@ -1,4 +1,5 @@
 import React from 'react';
+
 import BaseCard from '../BaseCard/BaseCard';
 
 import './StatsCard.css';

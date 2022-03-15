@@ -4,8 +4,10 @@ import './BaseCard.css';
 
 function BaseCard({ customClasses, children }) {
   return (
-    <div className={`card-container ${customClasses}`}>
-      {children}
+    <div className="card-container">
+      <div className={customClasses}>
+        {children}
+      </div>
     </div>
   );
 }

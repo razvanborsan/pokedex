@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import './EvolutionCard.css';
+import { capitalize } from 'shared/helpers';
 
 import data from 'data/data.json';
-import { Link } from 'react-router-dom';
-import { capitalize } from '../../../shared/helpers';
 import BaseCard from '../BaseCard/BaseCard';
+
+import './EvolutionCard.css';
 
 function Evolution({ pokemon, pokemonType }) {
   return (

@@ -13,7 +13,7 @@ function TypeCard({ type }) {
 
   return (
     <span className="type-card-container">
-      <img className="type-icon" src={icon} alt="psa" />
+      <img className="type-icon" src={icon} alt="Pokemon type icon" />
       {capitalize(type)}
     </span>
   );
