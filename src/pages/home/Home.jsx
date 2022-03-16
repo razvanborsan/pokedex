@@ -12,6 +12,10 @@ import './Home.css';
 function Home() {
   const [filter, setFilter] = useState('');
 
+  const handleFilterChange = (newFilterValue) => {
+    setFilter(newFilterValue);
+  };
+
   function getPokemonCards(data) {
     return data.reduce((accumulator, pokemon) => {
       if (isStringIncluded(pokemon.name, filter)
@@ -27,7 +31,7 @@ function Home() {
   return (
     <>
       <div className="header-container">
-        <Search placeholder="Search pokemon name, number or type..." value={filter} setValue={setFilter} />
+        <Search placeholder="Search pokemon name, number or type..." value={filter} setValue={handleFilterChange} />
       </div>
       <div className="cards-container">
         {getPokemonCards(pokemons)}

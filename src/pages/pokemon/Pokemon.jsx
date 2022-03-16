@@ -1,15 +1,16 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import data from 'data/data.json';
-
 import NotFound from 'pages/404/NotFound';
 
+import ViewCard from 'components/cards/ViewCard/ViewCard';
+import StatsCard from 'components/cards/StatsCard/StatsCard';
+import EvolutionCard from 'components/cards/EvolutionCard/EvolutionCard';
+import SpritesCard from 'components/cards/SpritesCard/SpritesCard';
+
+import data from 'data/data.json';
+
 import './Pokemon.css';
-import ViewCard from '../../components/cards/ViewCard/ViewCard';
-import StatsCard from '../../components/cards/StatsCard/StatsCard';
-import EvolutionCard from '../../components/cards/EvolutionCard/EvolutionCard';
-import SpritesCard from '../../components/cards/SpritesCard/SpritesCard';
 
 function Pokemon() {
   const { pokemonId } = useParams();

@@ -4,11 +4,13 @@
     align-items: center;
     gap: 5px;
 
-    background-color: white;
-    color: var(--marine);
+    margin: 10px;
     padding: 5px 10px;
     border-radius: 7px;
-    margin: 10px;
+
+    background-color: var(--white);
+
+    color: var(--marine);
 }
 
 .type-icon {

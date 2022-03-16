@@ -15,6 +15,10 @@ function InfoBlock({ headerText, contentText }) {
 }
 
 function ViewCard({ pokemon }) {
+  function getPokemonTypeCards() {
+    return pokemon.types.map((entry) => <TypeCard key={entry.slot} type={entry.type.name} />);
+  }
+
   return (
     <BaseCard customClasses={`pokemon-artwork-card ${pokemon.types[0].type.name}`}>
       <div className="pokemon-artwork-card-header">
@@ -27,7 +31,7 @@ function ViewCard({ pokemon }) {
         </span>
 
         <span className="pokemon-types-container">
-          {pokemon.types.map((entry) => <TypeCard key={entry.slot} type={entry.type.name} />)}
+          {getPokemonTypeCards()}
         </span>
       </div>
 

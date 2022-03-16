@@ -1,29 +1,23 @@
 .pokemon-evolutions-container {
-    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
 
+    margin: 0;
     width: 100%;
     height: 150px;
-
-    gap: 40px;
-    margin: 0;
-
-    flex-direction: row;
-    overflow-x: scroll;
-
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+    border-radius: 10px;
+    padding: 10px 0;
 }
 
-.pokemon-evolutions-container::-webkit-scrollbar {
-    display: none;
-}
+.evolution-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
-.evolution-wrapper:first-of-type {
-    padding-left: 20px;
-}
-
-.evolution-wrapper:last-of-type {
-    padding-right: 20px;
+    min-width: 130px;
 }
 
 .evolution-wrapper > img {
@@ -31,18 +25,18 @@
 }
 
 .evolution-wrapper:hover {
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .evolution-wrapper {
-    color: black;
+    color: var(--black  );
 
     transition: background-color .3s, border-radius .2s;
 }
 
 .evolution-title {
-    font-weight: bold;
     font-size: 17px;
+    font-weight: bold;
 }
 
 .evolution-id {
