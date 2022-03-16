@@ -14,7 +14,7 @@ function Stat({ title, value }) {
   return (
     <div className="stat-wrapper">
       <span className="stat-title">{title}</span>
-      <span className="stat-line" style={{ width: +value, backgroundColor: getBgColor(+value) }} />
+      <span className="stat-line" style={{ width: +value / 1.3, backgroundColor: getBgColor(+value) }} />
       <span className="stat-value">{value}</span>
     </div>
   );

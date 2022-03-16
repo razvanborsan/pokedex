@@ -2,10 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
-    width: 100%;
-    margin: 40px 0;
-    padding: 30px;
+    width: 1050px;
+    border-radius: inherit;
+    padding: 25px 0;
 }
 
 .sprite-image {
