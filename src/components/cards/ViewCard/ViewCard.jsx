@@ -1,5 +1,7 @@
 import React from 'react';
-import { capitalize } from 'shared/helpers';
+import { Image } from 'react-img-placeholder';
+import capitalize, { capitalizeAllWords } from 'shared/helpers/capitalize';
+import pokemonEgg from 'images/pokemon_egg.png';
 import BaseCard from '../BaseCard/BaseCard';
 import TypeCard from '../TypeCard/TypeCard';
 
@@ -14,7 +16,7 @@ function InfoBlock({ headerText, contentText }) {
   );
 }
 
-function ViewCard({ pokemon }) {
+function ViewCard({ pokemon, species }) {
   function getPokemonTypeCards() {
     return pokemon.types.map((entry) => <TypeCard key={entry.slot} type={entry.type.name} />);
   }
@@ -35,14 +37,14 @@ function ViewCard({ pokemon }) {
         </span>
       </div>
 
-      <img className="pokemon-artwork" src={pokemon.sprites.other.official_artwork.front_default} alt="Pokemon" />
+      <Image src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" width={400} height={400} placeholderSrc={pokemonEgg} />
 
       <div className="pokemon-info-container">
-        <InfoBlock headerText="Hello" contentText="World" />
-        <InfoBlock headerText="Hello" contentText="World" />
-        <InfoBlock headerText="Hello" contentText="World" />
-        <InfoBlock headerText="Hello" contentText="World" />
-        <InfoBlock headerText="Hello" contentText="World" />
+        <InfoBlock headerText="Weight" contentText={`${pokemon.weight / 10} kg`} />
+        <InfoBlock headerText="Height" contentText={`${pokemon.height / 10} meters`} />
+        <InfoBlock headerText="Color" contentText={`${capitalize(species?.color?.name)}`} />
+        <InfoBlock headerText="Habitat" contentText={`${capitalizeAllWords(species?.habitat?.name)}`} />
+        <InfoBlock headerText="Shape" contentText={`${capitalize(species?.shape?.name)}`} />
       </div>
     </BaseCard>
   );
