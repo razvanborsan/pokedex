@@ -1,4 +1,4 @@
-@import '../../shared/pokemonTypes.css';
+@import '../../shared/styles/pokemonTypes.css';
 
 .pokemon-content {
     min-height: 100vh;
@@ -7,6 +7,15 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.card-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+    width: 100%;
 }
 
 .pokemon-content-upper {
@@ -39,4 +48,24 @@
 
 .pokemon-trivia-container {
     max-width: 500px;
+}
+
+.pokemon-description-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+}
+
+.pokemon-description-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.pokemon-description-select select {
+    padding: 10px 0 10px 10px;
+    border-radius: 5px;
 }

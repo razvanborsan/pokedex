@@ -1,10 +1,13 @@
 import React from 'react';
+import { Image } from 'react-img-placeholder';
 import { Link } from 'react-router-dom';
 
-import { capitalize } from 'shared/helpers';
+import capitalize from 'shared/helpers/capitalize';
 
-import data from 'data/data.json';
+import pokemonEgg from 'images/pokemon_egg.png';
+
 import BaseCard from '../BaseCard/BaseCard';
+import TypeCard from '../TypeCard/TypeCard';
 
 import './EvolutionCard.css';
 
@@ -17,20 +20,25 @@ function Evolution({ pokemon, pokemonType }) {
           #
           {pokemon.id.toString().padStart(3, '0')}
         </div>
-        <img src={pokemon.sprites.other.official_artwork.front_default} alt="Pokemon" />
+        <Image src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" width={150} height={150} placeholderSrc={pokemonEgg} />
+        <div className="evolution-types-container">
+          {pokemon.types.map((entry) => (
+            <TypeCard key={entry.slot} type={entry.type.name} />
+          ))}
+        </div>
       </div>
     </Link>
   );
 }
 
-function EvolutionCard({ pokemonType }) {
-  return (
+function EvolutionCard({ pokemonType, evolutions }) {
+  return evolutions.map((evolutionLine) => (
     <BaseCard customClasses={`pokemon-evolutions-container ${pokemonType}`}>
-      <Evolution pokemon={data[0]} pokemonType={pokemonType} />
-      <Evolution pokemon={data[1]} pokemonType={pokemonType} />
-      <Evolution pokemon={data[2]} pokemonType={pokemonType} />
+      {
+        evolutionLine.map((form) => <Evolution pokemon={form} pokemonType={pokemonType} />)
+      }
     </BaseCard>
-  );
+  ));
 }
 
 export default EvolutionCard;

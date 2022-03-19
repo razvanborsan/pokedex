@@ -1,11 +1,14 @@
 import React from 'react';
+import { Image } from 'react-img-placeholder';
 import { Link } from 'react-router-dom';
 
-import { capitalize } from 'shared/helpers';
+import capitalize from 'shared/helpers/capitalize';
+import pokemonEgg from 'images/pokemon_egg.png';
 
-import 'shared/pokemonTypes.css';
 import BaseCard from '../BaseCard/BaseCard';
 import TypeCard from '../TypeCard/TypeCard';
+
+import 'shared/styles/pokemonTypes.css';
 import './PreviewCard.css';
 
 function PreviewCard({ pokemon }) {
@@ -28,7 +31,7 @@ function PreviewCard({ pokemon }) {
               ))}
             </div>
             <div className="pokemon-photo">
-              <img src={pokemon.sprites.other.official_artwork.front_default} alt="Pokemon" />
+              <Image src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" width={100} height={100} placeholderSrc={pokemonEgg} />
             </div>
           </div>
         </div>

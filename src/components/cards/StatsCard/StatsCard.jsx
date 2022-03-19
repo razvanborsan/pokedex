@@ -1,4 +1,5 @@
 import React from 'react';
+import capitalize from 'shared/helpers/capitalize';
 
 import BaseCard from '../BaseCard/BaseCard';
 
@@ -13,22 +14,19 @@ function Stat({ title, value }) {
 
   return (
     <div className="stat-wrapper">
-      <span className="stat-title">{title}</span>
+      <span className="stat-title">{title.split('-').map((word) => capitalize(word)).join(' ')}</span>
       <span className="stat-line" style={{ width: +value / 1.3, backgroundColor: getBgColor(+value) }} />
       <span className="stat-value">{value}</span>
     </div>
   );
 }
 
-function StatsCard({ pokemonType }) {
+function StatsCard({ pokemonType, stats }) {
   return (
     <BaseCard customClasses={`pokemon-stats-container ${pokemonType}`}>
-      <Stat title="HP" value="124" />
-      <Stat title="Attack" value="69" />
-      <Stat title="Defense" value="255" />
-      <Stat title="Speed" value="33" />
-      <Stat title="Special Attack" value="85" />
-      <Stat title="Special Defense" value="188" />
+      {
+        stats.map((entry) => <Stat title={entry?.stat?.name} value={entry?.base_stat} />)
+      }
     </BaseCard>
   );
 }
