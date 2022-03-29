@@ -1,19 +1,65 @@
-import React from 'react';
-import { Image } from 'react-img-placeholder';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { Image } from 'react-img-placeholder';
+import { Box } from '@chakra-ui/react';
+import { motion, useAnimation } from 'framer-motion';
+
 import capitalize from 'shared/helpers/capitalize';
-import pokemonEgg from 'images/pokemon_egg.png';
+import getPokemonSpriteUrl from 'shared/helpers/getPokemonSpriteUrl';
 
-import BaseCard from '../BaseCard/BaseCard';
-import TypeCard from '../TypeCard/TypeCard';
+import pokemonEgg from 'images/pokemon_egg.svg';
 
-import 'shared/styles/pokemonTypes.css';
 import './PreviewCard.css';
 
+const MotionBox = motion(Box);
+
+const spriteVariants = {
+  init: {
+    y: 0,
+  },
+  firstRender: {
+    scale: 1,
+  },
+  anim: {
+    y: [0, -8, 0, 8, 0],
+    transition: {
+      ease: 'linear',
+      type: 'spring',
+      stiffness: 200,
+      duration: 2,
+      repeat: Infinity,
+    },
+  },
+};
+
 function PreviewCard({ pokemon }) {
+  const [animateSprite, setAnimateSprite] = useState(false);
+  const spriteAnimation = useAnimation();
+
+  useEffect(() => {
+    spriteAnimation.set(spriteVariants.firstRender);
+  }, []);
+
+  useEffect(() => {
+    if (animateSprite) {
+      spriteAnimation.start(spriteVariants.anim);
+    } else {
+      spriteAnimation.stop();
+      spriteAnimation.set(spriteVariants.init);
+    }
+  }, [animateSprite]);
+
   return (
-    <BaseCard customClasses={`preview-card ${pokemon.types[0].type.name}`}>
+    <MotionBox
+      className="preview-card"
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      whileHover={{ scale: 1.1 }}
+      onHoverStart={() => setAnimateSprite(true)}
+      onHoverEnd={() => setAnimateSprite(false)}
+      whileTap={{ scale: 0.9 }}
+    >
       <Link to={`/pokemon/${pokemon.id}`} id={pokemon.id}>
         <div className="card-content">
           <div className="card-header">
@@ -22,21 +68,24 @@ function PreviewCard({ pokemon }) {
               #
               {pokemon.id.toString().padStart(3, '0')}
             </h4>
-          </div>
-
-          <div className="card-body">
-            <div className="pokemon-types-wrapper">
-              {pokemon.types.map((entry) => (
-                <TypeCard key={entry.slot} type={entry.type.name} />
-              ))}
-            </div>
-            <div className="pokemon-photo">
-              <Image src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" width={100} height={100} placeholderSrc={pokemonEgg} />
-            </div>
+            <MotionBox
+              className="pokemon-photo"
+              animate={spriteAnimation}
+              initial={{ scale: 0 }}
+              onAnimationComplete={() => setAnimateSprite(false)}
+            >
+              <Image
+                src={getPokemonSpriteUrl(pokemon?.id)}
+                alt={`${pokemon.name} sprite`}
+                width={150}
+                height={150}
+                placeholderSrc={pokemonEgg}
+              />
+            </MotionBox>
           </div>
         </div>
       </Link>
-    </BaseCard>
+    </MotionBox>
   );
 }
 

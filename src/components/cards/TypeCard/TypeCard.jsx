@@ -3,7 +3,7 @@ import { Image } from 'react-img-placeholder';
 
 import capitalize from 'shared/helpers/capitalize';
 import getTypeIcon from 'shared/helpers/getTypeIcon';
-import pokemonEgg from 'images/pokemon_egg.png';
+import pokemonEgg from 'images/pokemon_egg.svg';
 
 import './TypeCard.css';
 

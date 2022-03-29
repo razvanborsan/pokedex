@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Flex } from '@chakra-ui/react';
+
 import './Layout.css';
 
 function Layout({ children }) {
@@ -11,7 +13,9 @@ function Layout({ children }) {
           <h1 className="pokedex-title">Pokedex</h1>
         </Link>
 
-        {children}
+        <Flex justify="center" align="flex-start" direction="column">
+          {children}
+        </Flex>
       </div>
     </div>
   );

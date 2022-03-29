@@ -1,7 +1,16 @@
+@import 'shared/styles/colors.css';
+
 .preview-card {
-    width: 300px;
+    width: 150px;
     height: 225px;
-    border-radius: inherit;
+    margin: 20px;
+    border-radius: 10px;
+
+    background-color: var(--marine);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .preview-card:hover {
@@ -15,32 +24,29 @@
     flex-direction: column;
 
     color: var(--white);
-
-    width: 275px;
 }
 
 .card-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
 
-    width: 85%;
+    gap: 15px;
+
+    color: var(--white);
 }
 
-.card-body {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.card-header > h4 {
+    margin: 0;
+}
 
-    width: 90%;
+.card-header > h3 {
+    margin: 0;
 }
 
 .pokemon-photo img {
-    width: 120px;
-    height: 120px;
-}
-
-.pokemon-types-wrapper {
-    color: var(--marine);
-    text-align: center;
+    width: 100px;
+    height: 100px;
+    image-rendering: pixelated;
 }

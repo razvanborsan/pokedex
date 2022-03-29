@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import Pokemon from './pages/pokemon/Pokemon';
-import Home from './pages/home/Home';
+import { ChakraProvider } from '@chakra-ui/react';
+
+import Layout from 'components/Layout/Layout';
+import PageLoader from 'components/PageLoader/PageLoader';
 
 import './index.css';
-import NotFound from './pages/404/NotFound';
-import Layout from './components/Layout/Layout';
+
+const Home = lazy(() => import('./pages/home/Home'));
+const Pokemon = lazy(() => import('./pages/pokemon/Pokemon'));
+const NotFound = lazy(() => import('./pages/404/NotFound'));
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="pokemon" element={<Home />} />
-          <Route path="pokemon/:pokemonId" element={<Pokemon />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Layout>
+      <ChakraProvider>
+        <Layout>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route index element={<Home />} />
+              <Route path="pokemon" element={<Home />} />
+              <Route path="pokemon/:pokemonId" element={<Pokemon />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </Layout>
+      </ChakraProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),

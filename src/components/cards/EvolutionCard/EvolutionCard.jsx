@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import capitalize from 'shared/helpers/capitalize';
 
-import pokemonEgg from 'images/pokemon_egg.png';
+import pokemonEgg from 'images/pokemon_egg.svg';
 
 import BaseCard from '../BaseCard/BaseCard';
 import TypeCard from '../TypeCard/TypeCard';
