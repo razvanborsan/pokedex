@@ -8,9 +8,11 @@ function useFetch(url) {
 
   const iife = async () => {
     try {
-      setLoading(true);
-      const response = await axios.get(url);
-      setData(response.data);
+      if (url) {
+        setLoading(true);
+        const response = await axios.get(url);
+        setData(response.data);
+      }
     } catch (err) {
       setError(err);
     } finally {

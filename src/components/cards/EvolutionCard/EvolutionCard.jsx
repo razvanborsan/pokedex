@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image } from 'react-img-placeholder';
 import { Link } from 'react-router-dom';
+
+import { Image } from '@chakra-ui/react';
 
 import capitalize from 'shared/helpers/capitalize';
 
@@ -20,7 +21,12 @@ function Evolution({ pokemon, pokemonType }) {
           #
           {pokemon.id.toString().padStart(3, '0')}
         </div>
-        <Image src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" width={150} height={150} placeholderSrc={pokemonEgg} />
+        <Image
+          src={pokemon.sprites.other['official-artwork'].front_default}
+          alt="Pokemon"
+          boxSize="150px"
+          fallbackSrc={pokemonEgg}
+        />
         <div className="evolution-types-container">
           {pokemon.types.map((entry) => (
             <TypeCard key={entry.slot} type={entry.type.name} />

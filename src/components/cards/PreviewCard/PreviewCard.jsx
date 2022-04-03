@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Image } from 'react-img-placeholder';
-import { Box } from '@chakra-ui/react';
+import { Box, Image } from '@chakra-ui/react';
 import { motion, useAnimation } from 'framer-motion';
 
 import capitalize from 'shared/helpers/capitalize';
@@ -77,9 +76,8 @@ function PreviewCard({ pokemon }) {
               <Image
                 src={getPokemonSpriteUrl(pokemon?.id)}
                 alt={`${pokemon.name} sprite`}
-                width={150}
-                height={150}
-                placeholderSrc={pokemonEgg}
+                boxSize="150px"
+                fallbackSrc={pokemonEgg}
               />
             </MotionBox>
           </div>

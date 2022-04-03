@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Image } from 'react-img-placeholder';
+import { Image } from '@chakra-ui/react';
 import { chakraComponents } from 'chakra-react-select';
 
 import getPokemonSpriteUrl from 'shared/helpers/getPokemonSpriteUrl';
@@ -14,9 +14,8 @@ const customComponents = {
       <Image
         src={getPokemonSpriteUrl(props?.data?.val)}
         alt={`${props.data.label} sprite`}
-        width={50}
-        height={50}
-        placeholderSrc={pokemonEgg}
+        boxSize="50px"
+        fallbackSrc={pokemonEgg}
       />
       {children}
     </chakraComponents.Option>

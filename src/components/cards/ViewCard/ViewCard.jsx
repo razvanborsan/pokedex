@@ -1,9 +1,13 @@
 import React from 'react';
-import { Image } from 'react-img-placeholder';
+
+import { Image } from '@chakra-ui/react';
+
 import capitalize, { capitalizeAllWords } from 'shared/helpers/capitalize';
+
+import BaseCard from 'components/cards/BaseCard/BaseCard';
+import TypeCard from 'components/cards/TypeCard/TypeCard';
+
 import pokemonEgg from 'images/pokemon_egg.svg';
-import BaseCard from '../BaseCard/BaseCard';
-import TypeCard from '../TypeCard/TypeCard';
 
 import './ViewCard.css';
 
@@ -37,7 +41,12 @@ function ViewCard({ pokemon, species }) {
         </span>
       </div>
 
-      <Image src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" width={400} height={400} placeholderSrc={pokemonEgg} />
+      <Image
+        src={pokemon.sprites.other['official-artwork'].front_default}
+        alt="Pokemon"
+        boxSize="400px"
+        fallbackSrc={pokemonEgg}
+      />
 
       <div className="pokemon-info-container">
         <InfoBlock headerText="Weight" contentText={`${pokemon.weight / 10} kg`} />

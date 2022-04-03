@@ -4,7 +4,7 @@ import { Center, Spinner } from '@chakra-ui/react';
 
 function PageLoader() {
   return (
-    <Center width="1080px">
+    <Center maxWidth={1080}>
       <Spinner />
     </Center>
   );
