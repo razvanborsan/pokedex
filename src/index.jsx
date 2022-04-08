@@ -9,9 +9,9 @@ import PageLoader from 'components/PageLoader/PageLoader';
 
 import './index.css';
 
-const Home = lazy(() => import('./pages/home/Home'));
-const Pokemon = lazy(() => import('./pages/pokemon/Pokemon'));
-const NotFound = lazy(() => import('./pages/404/NotFound'));
+const Home = lazy(() => import('pages/home/Home'));
+const Pokemon = lazy(() => import('pages/pokemon/Pokemon'));
+const NotFound = lazy(() => import('pages/404/NotFound'));
 
 ReactDOM.render(
   <React.StrictMode>

@@ -41,7 +41,13 @@ function EvolutionCard({ pokemonType, evolutions }) {
   return evolutions.map((evolutionLine) => (
     <BaseCard customClasses={`pokemon-evolutions-container ${pokemonType}`}>
       {
-        evolutionLine.map((form) => <Evolution pokemon={form} pokemonType={pokemonType} />)
+        evolutionLine.map((form) => (
+          <Evolution
+            key={form.id}
+            pokemon={form}
+            pokemonType={pokemonType}
+          />
+        ))
       }
     </BaseCard>
   ));

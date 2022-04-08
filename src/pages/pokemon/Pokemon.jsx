@@ -9,11 +9,12 @@ import StatsCard from 'components/cards/StatsCard/StatsCard';
 import EvolutionCard from 'components/cards/EvolutionCard/EvolutionCard';
 import SpritesCard from 'components/cards/SpritesCard/SpritesCard';
 
-import './Pokemon.css';
 import axios from 'axios';
 import usePokemonById from '../../hooks/usePokemonById';
 import usePokemonSpeciesById from '../../hooks/usePokemonSpeciesById';
 import normalizeString from '../../shared/helpers/normalizeString';
+
+import './Pokemon.css';
 
 const fetchEvolutionChain = (url) => {
   if (url) {
@@ -74,6 +75,7 @@ function Pokemon() {
 
   const [evoChain, setEvoChain] = useState([]);
   const descriptions = species?.flavor_text_entries.filter((entry) => entry?.language?.name === 'en');
+  console.log('desc', descriptions);
   const [currDesc, setCurrDesc] = useState(descriptions?.find((description) => description) || '');
 
   useEffect(async () => {
@@ -106,7 +108,10 @@ function Pokemon() {
                       <select onChange={(event) => setCurrDesc(event.target.value)}>
                         {descriptions?.map(
                           (description) => (
-                            <option value={description?.flavor_text}>
+                            <option
+                              key={description?.version?.name}
+                              value={description?.flavor_text}
+                            >
                               {normalizeString(description?.version?.name)}
                             </option>
                           ),
