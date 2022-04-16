@@ -22,9 +22,9 @@ function Stat({ title, value }) {
   );
 }
 
-function StatsCard({ pokemonType, stats }) {
+function StatsCard({ types, stats }) {
   return (
-    <BaseCard customClasses={`pokemon-stats-container ${pokemonType}`}>
+    <BaseCard types={types} customClasses="pokemon-stats-container">
       {
         stats.map((entry) => (
           <Stat

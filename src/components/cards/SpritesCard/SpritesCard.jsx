@@ -25,7 +25,7 @@ function SpritesCard({ pokemon }) {
     back_shiny,
   } = pokemon.sprites;
   return (
-    <BaseCard customClasses={`sprites-container ${pokemon.types[0].type.name}`}>
+    <BaseCard types={pokemon?.types} customClasses="sprites-container">
       <div className="sprites">
         {front_female && <Sprite title="Front Female" imgSource={front_female} />}
         {front_default && <Sprite title="Front Female" imgSource={front_default} />}

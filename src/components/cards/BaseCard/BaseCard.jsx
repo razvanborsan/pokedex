@@ -1,13 +1,21 @@
 import React from 'react';
+import { Box } from '@chakra-ui/react';
+
+import getTypeColor from 'shared/helpers/getTypeColor';
 
 import './BaseCard.css';
 
-function BaseCard({ customClasses, children }) {
+function BaseCard({ customClasses, types, children }) {
   return (
     <div className="card-container">
-      <div className={customClasses}>
+      <Box
+        className={customClasses}
+        style={{
+          ...getTypeColor(types),
+        }}
+      >
         {children}
-      </div>
+      </Box>
     </div>
   );
 }

@@ -1,3 +1,3 @@
-const getPokemonIdFromUrl = (url) => +url.split('/').slice(-2)[0];
+const getPokemonIdFromUrl = (url) => url && +url.split('/').slice(-2)[0];
 
 export default getPokemonIdFromUrl;

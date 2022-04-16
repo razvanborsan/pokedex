@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Box, Image } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
 import { motion, useAnimation } from 'framer-motion';
 
+import TypeCard from 'components/cards/TypeCard/TypeCard';
 import capitalize from 'shared/helpers/capitalize';
-import getPokemonSpriteUrl from 'shared/helpers/getPokemonSpriteUrl';
-
+import getTypeColor from 'shared/helpers/getTypeColor';
+import usePokemonFormById from 'hooks/usePokemonFormById';
 import pokemonEgg from 'images/pokemon_egg.svg';
 
 import './PreviewCard.css';
@@ -35,6 +36,7 @@ const spriteVariants = {
 function PreviewCard({ pokemon }) {
   const [animateSprite, setAnimateSprite] = useState(false);
   const spriteAnimation = useAnimation();
+  const [pokes] = usePokemonFormById(pokemon?.id);
 
   useEffect(() => {
     spriteAnimation.set(spriteVariants.firstRender);
@@ -49,9 +51,14 @@ function PreviewCard({ pokemon }) {
     }
   }, [animateSprite]);
 
+  const types = pokes?.types;
+
   return (
     <MotionBox
       className="preview-card"
+      style={{
+        ...getTypeColor(types),
+      }}
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       whileHover={{ scale: 1.1 }}
@@ -74,12 +81,14 @@ function PreviewCard({ pokemon }) {
               onAnimationComplete={() => setAnimateSprite(false)}
             >
               <Image
-                src={getPokemonSpriteUrl(pokemon?.id)}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon?.id}.png`}
                 alt={`${pokemon.name} sprite`}
-                boxSize="150px"
                 fallbackSrc={pokemonEgg}
               />
             </MotionBox>
+            <Flex justify="center" align="center" direction="row">
+              {pokes?.types?.map((poke) => <TypeCard key={poke?.slot} type={poke?.type?.name} />)}
+            </Flex>
           </div>
         </div>
       </Link>

@@ -1,90 +1,36 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Flex } from '@chakra-ui/react';
 
 import NotFound from 'pages/404/NotFound';
+
+import usePokemonById from 'hooks/usePokemonById';
+import usePokemonSpeciesById from 'hooks/usePokemonSpeciesById';
+import useEvolutions from 'hooks/useEvolutions';
+import normalizeString from 'shared/helpers/normalizeString';
 
 import ViewCard from 'components/cards/ViewCard/ViewCard';
 import StatsCard from 'components/cards/StatsCard/StatsCard';
 import EvolutionCard from 'components/cards/EvolutionCard/EvolutionCard';
 import SpritesCard from 'components/cards/SpritesCard/SpritesCard';
 
-import axios from 'axios';
-import usePokemonById from '../../hooks/usePokemonById';
-import usePokemonSpeciesById from '../../hooks/usePokemonSpeciesById';
-import normalizeString from '../../shared/helpers/normalizeString';
-
 import './Pokemon.css';
-
-const fetchEvolutionChain = (url) => {
-  if (url) {
-    return axios.get(url);
-  }
-  return null;
-};
-
-const getPokemonByName = (name) => axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-
-const getAllEvolutions = async (chain) => {
-  const initial = getPokemonByName(chain?.species?.name);
-  const evolutions = [];
-
-  const evos = [initial];
-
-  for (const evolution of chain.evolves_to) {
-    const firstEvolution = getPokemonByName(evolution.species.name);
-    evos.push(firstEvolution);
-
-    if (evolution.evolves_to?.length) {
-      for (const secondEvolution of evolution.evolves_to) {
-        const second = getPokemonByName(secondEvolution.species.name);
-        evos.push(second);
-      }
-    }
-  }
-
-  const resolved = await Promise.all(evos);
-
-  for (const evolution of chain.evolves_to) {
-    const ceva = resolved.map((response) => response.data);
-    const initialEvolution = ceva.find((pokemon) => pokemon.name === chain?.species?.name);
-    const firstEvolution = ceva.find((pokemon) => pokemon.name === evolution.species.name);
-    const evolutionLine = [initialEvolution, firstEvolution];
-
-    if (evolution.evolves_to.length) {
-      for (const secondEvolution of evolution.evolves_to) {
-        const second = ceva.find((pokemon) => pokemon.name === secondEvolution.species.name);
-        evolutions.push([...evolutionLine, second]);
-      }
-    } else {
-      evolutions.push(evolutionLine);
-    }
-  }
-
-  return evolutions;
-};
 
 function Pokemon() {
   const { pokemonId } = useParams();
-  if (Number.isNaN(+pokemonId) || +pokemonId < 1 || +pokemonId > 811) {
+  if (Number.isNaN(+pokemonId) || +pokemonId < 1 || +pokemonId > 898) {
     return <NotFound />;
   }
 
   const { data: pokemon, loading } = usePokemonById(pokemonId);
   const { data: species } = usePokemonSpeciesById(pokemonId);
+  const { data: evoChain } = useEvolutions(species?.evolution_chain?.url);
 
-  const [evoChain, setEvoChain] = useState([]);
   const descriptions = species?.flavor_text_entries.filter((entry) => entry?.language?.name === 'en');
-  console.log('desc', descriptions);
   const [currDesc, setCurrDesc] = useState(descriptions?.find((description) => description) || '');
 
   useEffect(async () => {
-    if (species?.evolution_chain?.url) {
-      const evolutions = await fetchEvolutionChain(species?.evolution_chain?.url);
-      const allEvo = await getAllEvolutions(evolutions?.data?.chain);
-      setEvoChain(allEvo || []);
-    }
-
     if (species?.flavor_text_entries) {
       setCurrDesc(species?.flavor_text_entries.filter((entry) => entry.language.name === 'en').find((e) => e).flavor_text);
     }
@@ -124,14 +70,19 @@ function Pokemon() {
 
                 <div className="card-content-container">
                   <h2>Stats</h2>
-                  <StatsCard pokemonType={pokemon?.types[0]?.type?.name} stats={pokemon?.stats} />
+                  <StatsCard types={pokemon?.types} stats={pokemon?.stats} />
                 </div>
               </div>
             </div>
 
             <div className="card-content-container">
               <h2>Evolutions</h2>
-              <EvolutionCard pokemonType={pokemon?.types[0]?.type?.name} evolutions={evoChain} />
+              <Flex width="100%" justify="center" align="center">
+                <EvolutionCard
+                  types={pokemon?.types}
+                  evolutions={evoChain}
+                />
+              </Flex>
             </div>
 
             <div className="pokemon-content-lower">

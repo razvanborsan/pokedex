@@ -1,12 +1,12 @@
-@import 'shared/styles/colors.css';
+@import 'shared/styles/pokemonTypes.css';
 
 .preview-card {
-    width: 150px;
-    height: 225px;
+    width: 210px;
+    height: 240px;
     margin: 20px;
     border-radius: 10px;
 
-    background-color: var(--marine);
+    border: .5px solid var(--marine);
 
     display: flex;
     justify-content: center;
@@ -32,9 +32,9 @@
     align-items: center;
     flex-direction: column;
 
-    gap: 15px;
+    gap: 8px;
 
-    color: var(--white);
+    color: var(--black);
 }
 
 .card-header > h4 {
@@ -48,5 +48,4 @@
 .pokemon-photo img {
     width: 100px;
     height: 100px;
-    image-rendering: pixelated;
 }

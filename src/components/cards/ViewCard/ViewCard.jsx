@@ -26,7 +26,7 @@ function ViewCard({ pokemon, species }) {
   }
 
   return (
-    <BaseCard customClasses={`pokemon-artwork-card ${pokemon.types[0].type.name}`}>
+    <BaseCard customClasses="pokemon-artwork-card" types={pokemon.types}>
       <div className="pokemon-artwork-card-header">
         <span className="pokemon-id-info">
           <div className="pokemon-name">{capitalize(pokemon.name)}</div>
