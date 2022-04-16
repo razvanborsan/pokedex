@@ -36,7 +36,7 @@ const spriteVariants = {
 function PreviewCard({ pokemon }) {
   const [animateSprite, setAnimateSprite] = useState(false);
   const spriteAnimation = useAnimation();
-  const [pokes] = usePokemonFormById(pokemon?.id);
+  const { data: pokemonForms } = usePokemonFormById(pokemon?.id);
 
   useEffect(() => {
     spriteAnimation.set(spriteVariants.firstRender);
@@ -51,7 +51,7 @@ function PreviewCard({ pokemon }) {
     }
   }, [animateSprite]);
 
-  const types = pokes?.types;
+  const types = pokemonForms?.types;
 
   return (
     <MotionBox
@@ -87,7 +87,9 @@ function PreviewCard({ pokemon }) {
               />
             </MotionBox>
             <Flex justify="center" align="center" direction="row">
-              {pokes?.types?.map((poke) => <TypeCard key={poke?.slot} type={poke?.type?.name} />)}
+              {pokemonForms?.types?.map(
+                (poke) => <TypeCard key={poke?.slot} type={poke?.type?.name} />,
+              )}
             </Flex>
           </div>
         </div>
