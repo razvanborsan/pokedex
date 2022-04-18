@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
 
 import NotFound from 'pages/404/NotFound';
 
@@ -10,6 +10,8 @@ import usePokemonSpeciesById from 'hooks/usePokemonSpeciesById';
 import useEvolutions from 'hooks/useEvolutions';
 import normalizeString from 'shared/helpers/normalizeString';
 
+import Search from 'components/Search/Search';
+import getPokemonSpriteUrl from 'shared/helpers/getPokemonSpriteUrl';
 import ViewCard from 'components/cards/ViewCard/ViewCard';
 import StatsCard from 'components/cards/StatsCard/StatsCard';
 import EvolutionCard from 'components/cards/EvolutionCard/EvolutionCard';
@@ -19,9 +21,6 @@ import './Pokemon.css';
 
 function Pokemon() {
   const { pokemonId } = useParams();
-  if (Number.isNaN(+pokemonId) || +pokemonId < 1 || +pokemonId > 898) {
-    return <NotFound />;
-  }
 
   const { data: pokemon, loading } = usePokemonById(pokemonId);
   const { data: species } = usePokemonSpeciesById(pokemonId);
@@ -30,18 +29,40 @@ function Pokemon() {
   const descriptions = species?.flavor_text_entries.filter((entry) => entry?.language?.name === 'en');
   const [currDesc, setCurrDesc] = useState(descriptions?.find((description) => description) || '');
 
-  useEffect(async () => {
-    if (species?.flavor_text_entries) {
-      setCurrDesc(species?.flavor_text_entries.filter((entry) => entry.language.name === 'en').find((e) => e).flavor_text);
+  useEffect(() => {
+    async function fetchData() {
+      if (species?.flavor_text_entries) {
+        setCurrDesc(species?.flavor_text_entries.filter((entry) => entry.language.name === 'en').find((e) => e).flavor_text);
+      }
     }
+
+    fetchData();
   }, [species]);
+
+  if (Number.isNaN(+pokemonId) || +pokemonId < 1 || +pokemonId > 898) {
+    return <NotFound />;
+  }
 
   return (
     <div className="pokemon-content">
       {loading
         ? <div>Loading</div>
         : (
-          <>
+          <Flex justify="center" align="flex-start" direction="column">
+            <Box width={400}>
+              <Search />
+            </Box>
+            <Flex width="100%" justify="space-between" align="center" direction="row">
+              <Box>
+                <Image
+                  src={getPokemonSpriteUrl(pokemon?.id)}
+                  alt="sprite"
+                  boxSize="100px"
+                  // fallbackSrc={pokemonEgg}
+                />
+              </Box>
+              <Box>Next</Box>
+            </Flex>
             <div className="pokemon-content-upper">
               <ViewCard pokemon={pokemon} species={species} />
 
@@ -91,7 +112,7 @@ function Pokemon() {
                 <SpritesCard pokemon={pokemon} />
               </div>
             </div>
-          </>
+          </Flex>
         )}
     </div>
   );

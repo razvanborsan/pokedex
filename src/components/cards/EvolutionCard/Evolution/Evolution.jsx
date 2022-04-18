@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Flex, Image } from '@chakra-ui/react';
 
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import TypeCard from 'components/cards/TypeCard/TypeCard';
@@ -37,9 +37,12 @@ function getEvolutionTriggers(details) {
     }
 
     triggers.push(
-      <Flex gap={2} justify="center" align="center" direction="row">
-        {normalizeString(detail.trigger.name)}
-        {trigger}
+      <Flex justify="center" align="center" direction="column">
+        <Flex gap={2} justify="center" align="center" direction="row">
+          {normalizeString(detail.trigger.name)}
+          {trigger}
+        </Flex>
+        <FontAwesomeIcon icon={faRightLong} />
       </Flex>,
     );
   });

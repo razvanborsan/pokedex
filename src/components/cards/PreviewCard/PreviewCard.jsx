@@ -7,10 +7,11 @@ import { motion, useAnimation } from 'framer-motion';
 import TypeCard from 'components/cards/TypeCard/TypeCard';
 import capitalize from 'shared/helpers/capitalize';
 import getTypeColor from 'shared/helpers/getTypeColor';
-import usePokemonFormById from 'hooks/usePokemonFormById';
 import pokemonEgg from 'images/pokemon_egg.svg';
 
 import './PreviewCard.css';
+import axios from 'axios';
+import { selectorFamily, useRecoilValue } from 'recoil';
 
 const MotionBox = motion(Box);
 
@@ -33,14 +34,24 @@ const spriteVariants = {
   },
 };
 
+const pokemonFormQuery = selectorFamily({
+  key: 'pokemonForm',
+  get: (pokeId) => async () => {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-form/${pokeId}`);
+
+    return response?.data;
+  },
+});
+
 function PreviewCard({ pokemon }) {
   const [animateSprite, setAnimateSprite] = useState(false);
   const spriteAnimation = useAnimation();
-  const { data: pokemonForms } = usePokemonFormById(pokemon?.id);
+
+  const pokemonForms = useRecoilValue(pokemonFormQuery(pokemon?.id));
 
   useEffect(() => {
     spriteAnimation.set(spriteVariants.firstRender);
-  }, []);
+  }, [spriteAnimation]);
 
   useEffect(() => {
     if (animateSprite) {
@@ -49,7 +60,7 @@ function PreviewCard({ pokemon }) {
       spriteAnimation.stop();
       spriteAnimation.set(spriteVariants.init);
     }
-  }, [animateSprite]);
+  }, [animateSprite, spriteAnimation]);
 
   const types = pokemonForms?.types;
 
@@ -59,8 +70,6 @@ function PreviewCard({ pokemon }) {
       style={{
         ...getTypeColor(types),
       }}
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
       whileHover={{ scale: 1.1 }}
       onHoverStart={() => setAnimateSprite(true)}
       onHoverEnd={() => setAnimateSprite(false)}
