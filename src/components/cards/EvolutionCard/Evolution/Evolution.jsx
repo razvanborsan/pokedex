@@ -1,18 +1,21 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-restricted-syntax */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Flex, Image } from '@chakra-ui/react';
+import sum from 'hash-sum';
 
 import { faPlus, faRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { pokemonByIdQuery } from 'queries';
 import TypeCard from 'components/cards/TypeCard/TypeCard';
-import usePokemonById from 'hooks/usePokemonById';
 import normalizeString from 'shared/helpers/normalizeString';
 import getPokemonIdFromUrl from 'shared/helpers/getPokemonIdFromUrl';
 import capitalize from 'shared/helpers/capitalize';
 import pokemonEgg from 'images/pokemon_egg.svg';
 
+import { useRecoilValue } from 'recoil';
 import evolutionDetails from '../evolutionDetails';
 
 import './Evolution.css';
@@ -24,26 +27,24 @@ const stageString = {
 };
 
 function getEvolutionTriggers(details) {
-  const triggers = [];
-
-  details?.forEach((detail) => {
+  const triggers = details?.map((detail, index) => {
     const trigger = [];
 
     for (const [key, value] of Object.entries(detail)) {
       if (!!value && key !== 'trigger') {
-        trigger.push(<FontAwesomeIcon icon={faPlus} />);
+        trigger.push(<FontAwesomeIcon key={sum(key)} icon={faPlus} />);
         trigger.push(evolutionDetails[key](value));
       }
     }
 
-    triggers.push(
-      <Flex justify="center" align="center" direction="column">
-        <Flex gap={2} justify="center" align="center" direction="row">
+    return (
+      <div justify="center" align="center" direction="column" key={sum(detail)}>
+        <Flex key={index} gap={2} justify="center" align="center" direction="row">
           {normalizeString(detail.trigger.name)}
           {trigger}
         </Flex>
         <FontAwesomeIcon icon={faRightLong} />
-      </Flex>,
+      </div>
     );
   });
 
@@ -56,7 +57,7 @@ function getEvolutionTriggers(details) {
 
 function Evolution({ stage, evolution }) {
   const pokemonId = getPokemonIdFromUrl(evolution?.species?.url);
-  const { data: pokemon } = usePokemonById(pokemonId);
+  const pokemon = useRecoilValue(pokemonByIdQuery(+pokemonId));
 
   return (
     <Flex

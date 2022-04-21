@@ -54,7 +54,14 @@ function PokemonGrid({ selectedGen }) {
         loadMore={() => setCurrentPage(currentPage + 1)}
         hasMore={renderedPokemonsNr(currentPage, pokemonList) !== pokemonList.length}
         loader={(
-          <Flex justify="center" align="center" marginTop={-5} width={1080} wrap="wrap">
+          <Flex
+            key="pokemon-grid-loader"
+            justify="center"
+            align="center"
+            marginTop={-5}
+            width={1080}
+            wrap="wrap"
+          >
             {skeleton.map((id) => <PreviewCardSkeleton key={id} />)}
           </Flex>
         )}

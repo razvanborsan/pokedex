@@ -18,11 +18,13 @@ function EvolutionCard({ types, evolutions }) {
       <Flex justify="center" align="center" direction="row">
         <Evolution stage={0} evolution={evolutions} />
         <Flex justify="center" align="flex-end" direction="column" gap={10}>
-          {firstEvolutions?.map((evolution) => (<Evolution stage={1} evolution={evolution} />))}
+          {firstEvolutions?.map((evolution) => (
+            <Evolution stage={1} key={evolution.species.name} evolution={evolution} />))}
         </Flex>
 
         <Flex justify="center" align="flex-end" direction="column" gap={10}>
-          {secondEvolutions?.map((evolution) => (<Evolution stage={2} evolution={evolution} />))}
+          {secondEvolutions?.map((evolution) => (
+            <Evolution stage={2} key={evolution.species.name} evolution={evolution} />))}
         </Flex>
 
       </Flex>
