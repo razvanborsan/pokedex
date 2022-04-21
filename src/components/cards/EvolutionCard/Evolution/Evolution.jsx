@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Flex, Image } from '@chakra-ui/react';
+import { useRecoilValue } from 'recoil';
 import sum from 'hash-sum';
 
 import { faPlus, faRightLong } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +16,6 @@ import getPokemonIdFromUrl from 'shared/helpers/getPokemonIdFromUrl';
 import capitalize from 'shared/helpers/capitalize';
 import pokemonEgg from 'images/pokemon_egg.svg';
 
-import { useRecoilValue } from 'recoil';
 import evolutionDetails from '../evolutionDetails';
 
 import './Evolution.css';
