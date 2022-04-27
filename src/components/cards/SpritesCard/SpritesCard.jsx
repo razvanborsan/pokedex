@@ -1,40 +1,40 @@
-/* eslint-disable camelcase */
 import React from 'react';
-import BaseCard from '../BaseCard/BaseCard';
+import { Image } from '@chakra-ui/react';
+
+import { usePokemonSprites } from 'hooks';
+import { normalizeStringUnderscore } from 'shared/helpers/normalizeString';
+import pokemonEgg from 'images/pokemon_egg.svg';
+import BaseCard from 'components/cards/BaseCard/BaseCard';
 
 import './SpritesCard.css';
 
-function Sprite({ title, imgSource }) {
+function Sprite({ sprite }) {
   return (
     <div className="sprite">
-      <div className="sprite-title">{title}</div>
-      <img className="sprite-image" src={imgSource} alt="Pokemon" />
+      <div className="sprite-title">{normalizeStringUnderscore(sprite.title)}</div>
+
+      <Image
+        src={sprite.url}
+        alt="Pokemon sprite"
+        boxSize="120px"
+        borderRadius="10px"
+        fallbackSrc={pokemonEgg}
+      />
     </div>
   );
 }
 
-function SpritesCard({ pokemon }) {
-  const {
-    front_female,
-    front_default,
-    back_female,
-    back_default,
-    front_shiny_female,
-    front_shiny,
-    back_shiny_female,
-    back_shiny,
-  } = pokemon.sprites;
+function SpritesCard({ types, sprites }) {
+  const updatedSprites = usePokemonSprites(sprites);
   return (
-    <BaseCard types={pokemon?.types} customClasses="sprites-container">
+    <BaseCard types={types} customClasses="sprites-container">
       <div className="sprites">
-        {front_female && <Sprite title="Front Female" imgSource={front_female} />}
-        {front_default && <Sprite title="Front Female" imgSource={front_default} />}
-        {back_female && <Sprite title="Front Female" imgSource={back_female} />}
-        {back_default && <Sprite title="Front Female" imgSource={back_default} />}
-        {front_shiny_female && <Sprite title="Front Female" imgSource={front_shiny_female} />}
-        {front_shiny && <Sprite title="Front Female" imgSource={front_shiny} />}
-        {back_shiny_female && <Sprite title="Front Female" imgSource={back_shiny_female} />}
-        {back_shiny && <Sprite title="Front Female" imgSource={back_shiny} />}
+        {updatedSprites.map((sprite) => (
+          <Sprite
+            key={sprite.title}
+            sprite={sprite}
+          />
+        ))}
       </div>
     </BaseCard>
   );

@@ -11,10 +11,6 @@
     image-rendering: pixelated;
 }
 
-.sprite-image {
-    width: 200px;
-}
-
 .sprites {
     display: flex;
     justify-content: center;

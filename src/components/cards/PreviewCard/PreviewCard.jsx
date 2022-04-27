@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import { Box, Flex, Image } from '@chakra-ui/react';
 import { motion, useAnimation } from 'framer-motion';
 
+import { useOfficialArtwork, usePokemonFormById } from 'hooks';
 import TypeCard from 'components/cards/TypeCard/TypeCard';
 import capitalize from 'shared/helpers/capitalize';
 import getTypeColor from 'shared/helpers/getTypeColor';
+
 import pokemonEgg from 'images/pokemon_egg.svg';
 
 import './PreviewCard.css';
-import axios from 'axios';
-import { selectorFamily, useRecoilValue } from 'recoil';
 
 const MotionBox = motion(Box);
 
@@ -34,20 +34,12 @@ const spriteVariants = {
   },
 };
 
-const pokemonFormQuery = selectorFamily({
-  key: 'pokemonForm',
-  get: (pokeId) => async () => {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-form/${pokeId}`);
-
-    return response?.data;
-  },
-});
-
 function PreviewCard({ pokemon }) {
   const [animateSprite, setAnimateSprite] = useState(false);
   const spriteAnimation = useAnimation();
 
-  const pokemonForms = useRecoilValue(pokemonFormQuery(pokemon?.id));
+  const pokemonForms = usePokemonFormById(pokemon.id);
+  const officialArtwork = useOfficialArtwork(pokemon?.id);
 
   useEffect(() => {
     spriteAnimation.set(spriteVariants.firstRender);
@@ -90,7 +82,7 @@ function PreviewCard({ pokemon }) {
               onAnimationComplete={() => setAnimateSprite(false)}
             >
               <Image
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon?.id}.png`}
+                src={officialArtwork}
                 alt={`${pokemon.name} sprite`}
                 fallbackSrc={pokemonEgg}
               />

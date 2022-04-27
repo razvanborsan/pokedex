@@ -1,13 +1,12 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import React, { Suspense, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import { useRecoilValue } from 'recoil';
 import { nanoid } from 'nanoid';
 
-import { pokemonListQuery } from 'queries';
 import getPokemonIdFromUrl from 'shared/helpers/getPokemonIdFromUrl';
 import PreviewCard from 'components/cards/PreviewCard/PreviewCard';
 import PreviewCardSkeleton from 'components/cards/PreviewCard/PreviewCardSkeleton';
+import { usePokemonList } from 'hooks';
 
 const POKEMON_PAGE_SIZE = 20;
 const skeleton = (() => [...Array(4)].map(() => nanoid()))();
@@ -38,7 +37,7 @@ function getPokemonCards(pokemons) {
 function PokemonGrid({ selectedGen }) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const pokemonList = useRecoilValue(pokemonListQuery(selectedGen));
+  const pokemonList = usePokemonList(selectedGen);
 
   return (
     <Box marginTop={10}>

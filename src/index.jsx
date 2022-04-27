@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 
 import Layout from 'components/Layout/Layout';
+import PokemonSkeleton from 'pages/pokemon/PokemonSkeleton';
 
 import './index.css';
 
@@ -36,7 +37,16 @@ ReactDOM.render(
               <Routes>
                 <Route index element={<Home />} />
                 <Route path="pokemon" element={<Home />} />
-                <Route path="pokemon/:pokemonId" element={<Pokemon />} />
+                <Route
+                  path="pokemon/:pokemonId"
+                  element={(
+                    <Suspense
+                      fallback={<PokemonSkeleton />}
+                    >
+                      <Pokemon />
+                    </Suspense>
+      )}
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </RecoilRoot>

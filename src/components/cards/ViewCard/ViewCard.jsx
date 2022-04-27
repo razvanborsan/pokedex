@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Image } from '@chakra-ui/react';
 
+import { useOfficialArtwork } from 'hooks';
 import capitalize, { capitalizeAllWords } from 'shared/helpers/capitalize';
 
 import BaseCard from 'components/cards/BaseCard/BaseCard';
@@ -25,6 +26,8 @@ function ViewCard({ pokemon, species }) {
     return pokemon.types.map((entry) => <TypeCard key={entry.slot} type={entry.type.name} />);
   }
 
+  const officialArtwork = useOfficialArtwork(pokemon?.id);
+
   return (
     <BaseCard customClasses="pokemon-artwork-card" types={pokemon.types}>
       <div className="pokemon-artwork-card-header">
@@ -42,7 +45,7 @@ function ViewCard({ pokemon, species }) {
       </div>
 
       <Image
-        src={pokemon.sprites.other['official-artwork'].front_default}
+        src={officialArtwork}
         alt="Pokemon"
         boxSize="400px"
         fallbackSrc={pokemonEgg}

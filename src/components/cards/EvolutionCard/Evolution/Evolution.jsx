@@ -3,13 +3,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Flex, Image } from '@chakra-ui/react';
-import { useRecoilValue } from 'recoil';
 import sum from 'hash-sum';
 
 import { faPlus, faRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { pokemonByIdQuery } from 'queries';
+import { useOfficialArtwork } from 'hooks';
 import TypeCard from 'components/cards/TypeCard/TypeCard';
 import normalizeString from 'shared/helpers/normalizeString';
 import getPokemonIdFromUrl from 'shared/helpers/getPokemonIdFromUrl';
@@ -19,6 +18,7 @@ import pokemonEgg from 'images/pokemon_egg.svg';
 import evolutionDetails from '../evolutionDetails';
 
 import './Evolution.css';
+import usePokemonById from '../../../../hooks/usePokemonById';
 
 const stageString = {
   0: 'Unevolved',
@@ -57,7 +57,8 @@ function getEvolutionTriggers(details) {
 
 function Evolution({ stage, evolution }) {
   const pokemonId = getPokemonIdFromUrl(evolution?.species?.url);
-  const pokemon = useRecoilValue(pokemonByIdQuery(+pokemonId));
+  const pokemon = usePokemonById(pokemonId);
+  const officialArtwork = useOfficialArtwork(+pokemonId);
 
   return (
     <Flex
@@ -78,7 +79,7 @@ function Evolution({ stage, evolution }) {
             className={`evolution-image-container ${pokemon?.types?.[0]?.type?.name}`}
           >
             <Image
-              src={pokemon?.sprites?.other?.['official-artwork']?.front_default}
+              src={officialArtwork}
               alt={`${evolution?.species?.name} sprite`}
               boxSize="100px"
               fallbackSrc={pokemonEgg}

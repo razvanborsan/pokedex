@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 
 import { AsyncSelect } from 'chakra-react-select';
 
-import { pokemonListQuery } from 'queries';
+import { usePokemonList } from 'hooks';
+
 import normalizeString from 'shared/helpers/normalizeString';
 
 import customComponents from './constants';
@@ -12,7 +12,7 @@ import customComponents from './constants';
 function Search() {
   const [pokemonOptions, setPokemonOptions] = useState([]);
 
-  const pokemons = useRecoilValue(pokemonListQuery(''));
+  const pokemons = usePokemonList('');
   const navigate = useNavigate();
 
   useEffect(() => {
