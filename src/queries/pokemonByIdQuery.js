@@ -6,7 +6,7 @@ const getPokemonUrl = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 const pokemonByIdQuery = selectorFamily({
   key: 'pokemonById',
   get: (id) => async () => {
-    if (typeof id === 'number' && !Number.isNaN(id) && id <= 898) {
+    if (typeof id === 'number' && !Number.isNaN(id) && id > 0 && id <= 898) {
       const pokemon = await axios.get(getPokemonUrl(id));
 
       return pokemon?.data;
