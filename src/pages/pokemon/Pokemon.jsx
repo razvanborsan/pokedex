@@ -1,142 +1,116 @@
-/* eslint-disable no-restricted-syntax */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  Box, Center, Divider, Flex, Select, Text,
+} from '@chakra-ui/react';
 
 import NotFound from 'pages/404/NotFound';
 
+import Search from 'components/Search/Search';
 import ViewCard from 'components/cards/ViewCard/ViewCard';
 import StatsCard from 'components/cards/StatsCard/StatsCard';
 import EvolutionCard from 'components/cards/EvolutionCard/EvolutionCard';
 import SpritesCard from 'components/cards/SpritesCard/SpritesCard';
+import PokemonHeaderCard from 'components/cards/PokemonHeaderCard/PokemonHeaderCard';
+import { useEvolutionChain, usePokemonById, usePokemonSpeciesById } from 'hooks';
 
+import getSpriteVersions from './helpers/getSpriteVersions';
+import getDescriptionSelectOptions from './helpers/getDescriptionSelectOptions';
+import getSpriteVersionSelectOptions from './helpers/getSpriteVersionSelectOptions';
 import './Pokemon.css';
-import axios from 'axios';
-import usePokemonById from '../../hooks/usePokemonById';
-import usePokemonSpeciesById from '../../hooks/usePokemonSpeciesById';
-import normalizeString from '../../shared/helpers/normalizeString';
-
-const fetchEvolutionChain = (url) => {
-  if (url) {
-    return axios.get(url);
-  }
-  return null;
-};
-
-const getPokemonByName = (name) => axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-
-const getAllEvolutions = async (chain) => {
-  const initial = getPokemonByName(chain?.species?.name);
-  const evolutions = [];
-
-  const evos = [initial];
-
-  for (const evolution of chain.evolves_to) {
-    const firstEvolution = getPokemonByName(evolution.species.name);
-    evos.push(firstEvolution);
-
-    if (evolution.evolves_to?.length) {
-      for (const secondEvolution of evolution.evolves_to) {
-        const second = getPokemonByName(secondEvolution.species.name);
-        evos.push(second);
-      }
-    }
-  }
-
-  const resolved = await Promise.all(evos);
-
-  for (const evolution of chain.evolves_to) {
-    const ceva = resolved.map((response) => response.data);
-    const initialEvolution = ceva.find((pokemon) => pokemon.name === chain?.species?.name);
-    const firstEvolution = ceva.find((pokemon) => pokemon.name === evolution.species.name);
-    const evolutionLine = [initialEvolution, firstEvolution];
-
-    if (evolution.evolves_to.length) {
-      for (const secondEvolution of evolution.evolves_to) {
-        const second = ceva.find((pokemon) => pokemon.name === secondEvolution.species.name);
-        evolutions.push([...evolutionLine, second]);
-      }
-    } else {
-      evolutions.push(evolutionLine);
-    }
-  }
-
-  return evolutions;
-};
 
 function Pokemon() {
   const { pokemonId } = useParams();
-  if (Number.isNaN(+pokemonId) || +pokemonId < 1 || +pokemonId > 811) {
+
+  const pokemon = usePokemonById(pokemonId);
+  const species = usePokemonSpeciesById(+pokemonId);
+  const evoChain = useEvolutionChain(species?.evolution_chain?.url);
+
+  const descriptions = species?.flavor_text_entries?.filter((entry) => entry?.language?.name === 'en');
+  const [currentDescription, setCurrentDescription] = useState(descriptions?.find(
+    (description) => description,
+  ).flavor_text);
+
+  const { other, versions, ...defaultSprites } = pokemon?.sprites || {};
+  const [currentSprites, setCurrentSprites] = useState(JSON.stringify(defaultSprites));
+  const spritesVersions = getSpriteVersions(versions, defaultSprites, +pokemonId);
+
+  useEffect(() => {
+    setCurrentSprites(JSON.stringify(defaultSprites));
+  }, [pokemonId]);
+
+  useEffect(() => {
+    setCurrentDescription(descriptions?.find(
+      (description) => description,
+    ).flavor_text);
+  }, [pokemonId]);
+
+  if (Number.isNaN(+pokemonId) || +pokemonId < 1 || +pokemonId > 898) {
     return <NotFound />;
   }
 
-  const { data: pokemon, loading } = usePokemonById(pokemonId);
-  const { data: species } = usePokemonSpeciesById(pokemonId);
-
-  const [evoChain, setEvoChain] = useState([]);
-  const descriptions = species?.flavor_text_entries.filter((entry) => entry?.language?.name === 'en');
-  const [currDesc, setCurrDesc] = useState(descriptions?.find((description) => description) || '');
-
-  useEffect(async () => {
-    if (species?.evolution_chain?.url) {
-      const evolutions = await fetchEvolutionChain(species?.evolution_chain?.url);
-      const allEvo = await getAllEvolutions(evolutions?.data?.chain);
-      setEvoChain(allEvo || []);
-    }
-
-    if (species?.flavor_text_entries) {
-      setCurrDesc(species?.flavor_text_entries.filter((entry) => entry.language.name === 'en').find((e) => e).flavor_text);
-    }
-  }, [species]);
-
   return (
     <div className="pokemon-content">
-      {loading
-        ? <div>Loading</div>
-        : (
-          <>
-            <div className="pokemon-content-upper">
-              <ViewCard pokemon={pokemon} species={species} />
+      <Flex width={1080} justify="center" align="flex-start" direction="column">
+        <Box width={400}>
+          <Search />
+        </Box>
+        <PokemonHeaderCard pokemon={pokemon} />
+        <Center width="100%" height="30px">
+          <Divider width="100%" height="2px" backgroundColor="#042440" borderRadius="2px" />
+        </Center>
+        <div className="pokemon-content-upper">
+          <ViewCard pokemon={pokemon} species={species} />
 
-              <div className="pokemon-trivia-container">
-                <div className="pokemon-description-container">
-                  <div className="pokemon-description-title">
-                    <h2>Description</h2>
-                    <div className="pokemon-description-select">
-                      <p>Game:</p>
-                      <select onChange={(event) => setCurrDesc(event.target.value)}>
-                        {descriptions?.map(
-                          (description) => (
-                            <option value={description?.flavor_text}>
-                              {normalizeString(description?.version?.name)}
-                            </option>
-                          ),
-                        )}
-                      </select>
-                    </div>
-                  </div>
-                  <p>{currDesc}</p>
-                </div>
-
-                <div className="card-content-container">
-                  <h2>Stats</h2>
-                  <StatsCard pokemonType={pokemon?.types[0]?.type?.name} stats={pokemon?.stats} />
-                </div>
+          <div className="pokemon-trivia-container">
+            <div className="pokemon-description-container">
+              <div className="pokemon-description-title">
+                <Text fontSize="2xl">Description</Text>
               </div>
+              <div className="pokemon-description-select">
+                <p>Game:</p>
+                <Select value={currentDescription} variant="filled" onChange={(event) => setCurrentDescription(event.target.value)}>
+                  {getDescriptionSelectOptions(descriptions)}
+                </Select>
+              </div>
+              <p>{currentDescription}</p>
             </div>
 
             <div className="card-content-container">
-              <h2>Evolutions</h2>
-              <EvolutionCard pokemonType={pokemon?.types[0]?.type?.name} evolutions={evoChain} />
+              <Text fontSize="2xl">Stats</Text>
+              <StatsCard types={pokemon?.types} stats={pokemon?.stats} />
             </div>
+          </div>
+        </div>
 
-            <div className="pokemon-content-lower">
-              <div className="card-content-container">
-                <h2>Sprites</h2>
-                <SpritesCard pokemon={pokemon} />
-              </div>
-            </div>
-          </>
-        )}
+        <div className="card-content-container">
+          <Text fontSize="2xl">Evolutions</Text>
+          <Flex width="100%" justify="center" align="center">
+            <EvolutionCard
+              types={pokemon?.types}
+              evolutions={evoChain}
+            />
+          </Flex>
+        </div>
+
+        <div className="pokemon-content-lower">
+          <div className="card-content-container">
+            <Text fontSize="2xl">Sprites</Text>
+            <Flex
+              justify="center"
+              align="center"
+              gap="10px"
+            >
+              Version:
+              {' '}
+              <Select value={currentSprites} variant="filled" onChange={(event) => setCurrentSprites(event.target.value)}>
+                {getSpriteVersionSelectOptions(spritesVersions)}
+              </Select>
+            </Flex>
+            <SpritesCard types={pokemon.types} sprites={JSON.parse(currentSprites)} />
+          </div>
+        </div>
+      </Flex>
     </div>
   );
 }

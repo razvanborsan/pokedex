@@ -1,9 +1,14 @@
 import React from 'react';
-import { Image } from 'react-img-placeholder';
+
+import { Image } from '@chakra-ui/react';
+
+import { useOfficialArtwork } from 'hooks';
 import capitalize, { capitalizeAllWords } from 'shared/helpers/capitalize';
-import pokemonEgg from 'images/pokemon_egg.png';
-import BaseCard from '../BaseCard/BaseCard';
-import TypeCard from '../TypeCard/TypeCard';
+
+import BaseCard from 'components/cards/BaseCard/BaseCard';
+import TypeCard from 'components/cards/TypeCard/TypeCard';
+
+import pokemonEgg from 'images/pokemon_egg.svg';
 
 import './ViewCard.css';
 
@@ -21,8 +26,10 @@ function ViewCard({ pokemon, species }) {
     return pokemon.types.map((entry) => <TypeCard key={entry.slot} type={entry.type.name} />);
   }
 
+  const officialArtwork = useOfficialArtwork(pokemon?.id);
+
   return (
-    <BaseCard customClasses={`pokemon-artwork-card ${pokemon.types[0].type.name}`}>
+    <BaseCard customClasses="pokemon-artwork-card" types={pokemon.types}>
       <div className="pokemon-artwork-card-header">
         <span className="pokemon-id-info">
           <div className="pokemon-name">{capitalize(pokemon.name)}</div>
@@ -37,7 +44,12 @@ function ViewCard({ pokemon, species }) {
         </span>
       </div>
 
-      <Image src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" width={400} height={400} placeholderSrc={pokemonEgg} />
+      <Image
+        src={officialArtwork}
+        alt="Pokemon"
+        boxSize="400px"
+        fallbackSrc={pokemonEgg}
+      />
 
       <div className="pokemon-info-container">
         <InfoBlock headerText="Weight" contentText={`${pokemon.weight / 10} kg`} />

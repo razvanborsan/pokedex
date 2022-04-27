@@ -6,11 +6,11 @@
     min-height: 100vh;
     padding-bottom: 60px;
 
-    background-color: #F2F2F2;
+    background-color: #E6E6E6;
 }
   
 .main-content {
-    width: 1080px;
+    max-width: 1080px;
 }
 
 .main-content > a {

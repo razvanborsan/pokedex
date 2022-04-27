@@ -7,10 +7,6 @@
     width: 1050px;
     border-radius: inherit;
     padding: 25px 0;
-}
-
-.sprite-image {
-    width: 200px;
 
     image-rendering: pixelated;
 }

@@ -5,3 +5,7 @@ export default function capitalize(input) {
 export function capitalizeAllWords(input) {
   return input ? input.split(' ').map((val) => capitalize(val)).join(' ') : '';
 }
+
+export function capitalizeAllLetters(input) {
+  return input ? input.split('').map((letter) => letter.toUpperCase()).join('') : '';
+}

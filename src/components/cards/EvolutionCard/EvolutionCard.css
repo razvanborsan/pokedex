@@ -47,3 +47,14 @@
     align-items: center;
     flex-direction: row;
 }
+
+.evolution-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 1050px;
+    padding: 15px;
+    border-radius: inherit;
+}

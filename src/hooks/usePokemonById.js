@@ -1,30 +1,10 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { pokemonByIdQuery } from 'queries';
 
 function usePokemonById(id) {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+  const pokemon = useRecoilValue(pokemonByIdQuery(+id));
 
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const iife = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(url);
-      setData(response.data);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    (iife());
-  }, [url]);
-
-  return { data, error, loading };
+  return pokemon;
 }
 
 export default usePokemonById;

@@ -1,44 +1,35 @@
+/* eslint-disable no-restricted-syntax */
+import { Flex } from '@chakra-ui/react';
 import React from 'react';
-import { Image } from 'react-img-placeholder';
-import { Link } from 'react-router-dom';
 
-import capitalize from 'shared/helpers/capitalize';
-
-import pokemonEgg from 'images/pokemon_egg.png';
-
-import BaseCard from '../BaseCard/BaseCard';
-import TypeCard from '../TypeCard/TypeCard';
+import BaseCard from 'components/cards/BaseCard/BaseCard';
+import Evolution from 'components/cards/EvolutionCard/Evolution/Evolution';
 
 import './EvolutionCard.css';
 
-function Evolution({ pokemon, pokemonType }) {
-  return (
-    <Link to={`/pokemon/${pokemon.id}`} id={pokemon.id}>
-      <div className={`evolution-wrapper ${pokemonType}-hover`}>
-        <div className="evolution-title">{capitalize(pokemon.name)}</div>
-        <div className="evolution-id">
-          #
-          {pokemon.id.toString().padStart(3, '0')}
-        </div>
-        <Image src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" width={150} height={150} placeholderSrc={pokemonEgg} />
-        <div className="evolution-types-container">
-          {pokemon.types.map((entry) => (
-            <TypeCard key={entry.slot} type={entry.type.name} />
-          ))}
-        </div>
-      </div>
-    </Link>
-  );
-}
+function EvolutionCard({ types, evolutions }) {
+  const firstEvolutions = evolutions?.evolves_to;
+  const secondEvolutions = evolutions?.evolves_to?.map(
+    (evolution) => evolution?.evolves_to,
+  ).flat();
 
-function EvolutionCard({ pokemonType, evolutions }) {
-  return evolutions.map((evolutionLine) => (
-    <BaseCard customClasses={`pokemon-evolutions-container ${pokemonType}`}>
-      {
-        evolutionLine.map((form) => <Evolution pokemon={form} pokemonType={pokemonType} />)
-      }
+  return (
+    <BaseCard types={types} customClasses="evolution-card-container">
+      <Flex justify="center" align="center" direction="row">
+        <Evolution stage={0} evolution={evolutions} />
+        <Flex justify="center" align="flex-end" direction="column" gap={10}>
+          {firstEvolutions?.map((evolution) => (
+            <Evolution stage={1} key={evolution.species.name} evolution={evolution} />))}
+        </Flex>
+
+        <Flex justify="center" align="flex-end" direction="column" gap={10}>
+          {secondEvolutions?.map((evolution) => (
+            <Evolution stage={2} key={evolution.species.name} evolution={evolution} />))}
+        </Flex>
+
+      </Flex>
     </BaseCard>
-  ));
+  );
 }
 
 export default EvolutionCard;

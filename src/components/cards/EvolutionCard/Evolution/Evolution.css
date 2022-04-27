@@ -1,0 +1,46 @@
+.evolution-triggers-container {
+    margin: 10px;
+    border-radius: 10px;
+
+
+    padding: 10px;
+
+    image-rendering: pixelated;
+}
+
+.evolution-image-container {
+    /* background-color: #F2E5A2; */
+    border: 2px solid var(--marine);
+    border-radius: 50%;
+    padding: 20px;
+    margin-bottom: 15px;
+
+}
+
+.evolution-badge-types {
+    background-color: #F2F2F2;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid var(--marine);
+    width: 100%;
+}
+
+.evolution-cardy-container {
+    padding: 10px;
+    border-radius: 10px;
+    /* border: .5px solid inherit; */
+
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+
+    width: 220px;
+
+    transition: background-color .3s, color .3s, outline-color .3s;
+}
+
+.evolution-cardy-container:hover {
+    /* background-color: var(--marine); */
+
+    outline: 1px solid var(--marine);
+}

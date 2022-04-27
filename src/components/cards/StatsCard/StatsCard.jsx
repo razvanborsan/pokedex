@@ -1,7 +1,8 @@
 import React from 'react';
-import capitalize from 'shared/helpers/capitalize';
 
-import BaseCard from '../BaseCard/BaseCard';
+import BaseCard from 'components/cards/BaseCard/BaseCard';
+
+import capitalize from 'shared/helpers/capitalize';
 
 import './StatsCard.css';
 
@@ -21,11 +22,17 @@ function Stat({ title, value }) {
   );
 }
 
-function StatsCard({ pokemonType, stats }) {
+function StatsCard({ types, stats }) {
   return (
-    <BaseCard customClasses={`pokemon-stats-container ${pokemonType}`}>
+    <BaseCard types={types} customClasses="pokemon-stats-container">
       {
-        stats.map((entry) => <Stat title={entry?.stat?.name} value={entry?.base_stat} />)
+        stats.map((entry) => (
+          <Stat
+            key={entry?.stat?.name}
+            title={entry?.stat?.name}
+            value={entry?.base_stat}
+          />
+        ))
       }
     </BaseCard>
   );

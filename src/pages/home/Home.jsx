@@ -1,55 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 
-import PreviewCard from 'components/cards/PreviewCard/PreviewCard';
+import {
+  Box, Flex,
+} from '@chakra-ui/react';
+
 import Search from 'components/Search/Search';
-
-import isStringIncluded from 'shared/helpers/isStringIncluded';
+import PokemonGrid from 'components/PokemonGrid/PokemonGrid';
+import PokemonGridSkeleton from 'components/PokemonGrid/PokemonGridSkeleton';
+import SearchSkeleton from 'components/Search/SearchSkeleton';
+import GenerationSelect from 'components/GenerationSelect/GenerationSelect';
+import GenerationSelectSkeleton from 'components/GenerationSelect/GenerationSelectSkeleton';
 
 import './Home.css';
-import axios from 'axios';
-import useFetch from '../../hooks/useFetch';
 
 function Home() {
-  const [filter, setFilter] = useState('');
-  const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/?limit=21');
-  const [pokes, setPokes] = useState([]);
-  const { data } = useFetch(url);
+  const [selectedGen, setSelectedGen] = useState('');
 
-  useEffect(async () => {
-    if (data) {
-      const promises = data.results.map((result) => axios.get(result.url));
-      const resolved = await Promise.all(promises);
-      setPokes([...pokes, ...resolved.map((answer) => answer.data)]);
-    }
-  }, [data]);
-
-  const handleFilterChange = (newFilterValue) => {
-    setFilter(newFilterValue);
+  const handleGenerationChange = (e) => {
+    setSelectedGen(e.target.value);
   };
-
-  function getPokemonCards(pokemons) {
-    return pokemons?.reduce?.((accumulator, pokemon) => {
-      if (isStringIncluded(pokemon.name, filter)
-      || pokemon.types.some((entry) => isStringIncluded(entry.type.name, filter))
-      || pokemon.id === +filter) {
-        accumulator.push(<PreviewCard key={pokemon.id} pokemon={pokemon} />);
-      }
-
-      return accumulator;
-    }, []) || [];
-  }
 
   return (
     <>
-      <div className="header-container">
-        <Search placeholder="Search pokemon name, number or type..." value={filter} setValue={handleFilterChange} />
-      </div>
-      <div className="cards-container">
-        {getPokemonCards(pokes)}
-      </div>
-      <div>
-        <button type="button" onClick={() => setUrl(data.next)}>Load more pokemons</button>
-      </div>
+      <Flex gap={30} justify align="center" className="header-container">
+        <Box width={400}>
+          <Suspense fallback={<SearchSkeleton />}>
+            <Search />
+          </Suspense>
+        </Box>
+
+        <Suspense fallback={<GenerationSelectSkeleton />}>
+          <GenerationSelect onChange={handleGenerationChange} />
+        </Suspense>
+      </Flex>
+      <Suspense fallback={<PokemonGridSkeleton />}>
+        <PokemonGrid
+          selectedGen={selectedGen}
+        />
+      </Suspense>
+
     </>
   );
 }
