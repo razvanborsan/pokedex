@@ -10,7 +10,7 @@ You can see the Pokedex App at this [link](https://dazzling-panini-599909.netlif
 
 Preview:
 
-![Imgur](https://i.imgur.com/IqMOTcZ.gif)
+![pokedex](https://user-images.githubusercontent.com/22635895/166138682-92af8ffd-2a7d-4b9b-b8ef-4d9ea0fa3cf1.gif)
 
 ### How to run
 
