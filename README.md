@@ -16,6 +16,6 @@ Preview:
 
 In order to run this project locally, it's enough to clone it and run `npm install` + `npm start` then open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### Tech Stack
+## Tech Stack
 
 I used React with Chakra UI for the interface, Framer Motion for animations and Recoil for state management. All data displayed is fetched from [PokeAPI](pokeapi.co/).
