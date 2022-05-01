@@ -1,15 +1,21 @@
 # Pokedex Web Application
 
-The scope of this project is to provide a model for people taking part in a React online course (FIIPractic Iasi, Romania) on what's expected from their work. I am organising this course together with a [colleague](https://github.com/stefanT9) of mine. Each week we will expand the scope of this pokedex, starting from simple, visual components and going thorugh routing, data fetching, responsiveness and everything needed to become a potent web developer. We want to encourage people to learn by practicing and building a React portfolio.
+The scope of this project is to provide a model for people participating in a React online course (part of FIIPractic project, Iasi, Romania). I have organised this course together with a [colleague](https://github.com/stefanT9) of mine. 
+
+Each week we expanded the scope of this pokedex, starting from simple, visual components and going thorugh routing, state management, data fetching and everything else we thought is needed for a beginner in web development. 
 
 ## Deployed app
 
-You can see the current state of the Pokedex App at this [link](https://dazzling-panini-599909.netlify.app/).
+You can see the Pokedex App at this [link](https://dazzling-panini-599909.netlify.app/).
 
-## How to run
+Preview:
 
-In order to run this project in development mode, it's enough to clone it and run the following command:
+![Imgur](https://i.imgur.com/IqMOTcZ.gif)
 
-### `npm start`
+### How to run
 
-Then open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+In order to run this project locally, it's enough to clone it and run `npm install` + `npm start` then open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### Tech Stack
+
+I used React with Chakra UI for the interface, Framer Motion for animations and Recoil for state management. All data displayed is fetched from [PokeAPI](pokeapi.co/).
